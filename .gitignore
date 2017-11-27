@@ -1,0 +1,12 @@
+*.swp
+.classpath
+.project
+.settings
+tags
+target
+.idea
+
+# Gradle files
+.gradle/*
+settings.gradle
+build/*
