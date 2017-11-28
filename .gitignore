@@ -5,6 +5,7 @@
 tags
 target
 .idea
+out
 
 # Gradle files
 .gradle/*
