@@ -1,8 +1,5 @@
 package io.bayonet.model.ecommerce.consulting;
 
-import io.bayonet.helpers.DataHelper;
-import io.bayonet.model.base.SocialProfileModel;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
