@@ -6,7 +6,6 @@ import io.bayonet.exceptions.BayonetException;
 import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.base.BaseResponse;
 import io.bayonet.model.ecommerce.*;
-import io.bayonet.model.ecommerce.consulting.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
