@@ -15,42 +15,42 @@ public class EcommerceConsultingRequest {
 
     /** Auth info of the client */
 
-    protected AuthModel auth;
+    private AuthModel auth;
 
 
     /** Consumer email */
 
-    protected String email;
+    private String email;
 
 
     /** Consumer name as received by a client */
 
-    protected String consumer_name;
+    private String consumer_name;
 
 
     /** Consumer ID used to identify this user in the client's internal system */
 
-    protected String consumer_internal_id;
+    private String consumer_internal_id;
 
 
     /** Name on the card being processed by the client */
 
-    protected String cardholder_name;
+    private String cardholder_name;
 
 
     /** Consumer phone number */
 
-    protected String telephone;
+    private String telephone;
 
 
     /** Card being used for the payment */
 
-    protected String card_number;
+    private String card_number;
 
 
     /** Bin number of the card being used - sent in case the client does not have the full card number */
 
-    protected String card_bin;
+    private String card_bin;
 
 
     /** Last 4 digits of the card being used - sent in case the client does not have the full card number */

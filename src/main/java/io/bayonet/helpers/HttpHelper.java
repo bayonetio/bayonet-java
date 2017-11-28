@@ -1,10 +1,7 @@
 package io.bayonet.helpers;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import io.bayonet.exceptions.BayonetException;
-import io.bayonet.model.BayonetResponse;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -41,7 +38,7 @@ public class HttpHelper {
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         if(route == null)
-            throw new BayonetException(-1, "Internal SDK error. The Http client implementation is incorrect. Please contact the Bayonet team", -1);
+            throw new BayonetException(-1, "Internal SDK error. The Http client implementation is incorrect. Please contact the Bayonet team to report this bug", -1);
         // parse the params to json
         String params_as_json = new Gson().toJson(params);
         // API full url
