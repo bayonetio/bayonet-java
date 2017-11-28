@@ -4,8 +4,11 @@ import com.google.gson.Gson;
 import io.bayonet.Bayonet;
 import io.bayonet.exceptions.BayonetException;
 import io.bayonet.helpers.HttpHelper;
+import io.bayonet.model.base.BaseResponse;
 import io.bayonet.model.ecommerce.consulting.EcommerceConsultingRequest;
 import io.bayonet.model.ecommerce.consulting.ConsultingResponse;
+import io.bayonet.model.ecommerce.consulting.EcommerceFeedbackHistoricalRequest;
+import io.bayonet.model.ecommerce.consulting.EcommerceFeedbackRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +53,40 @@ public class EcommerceClient extends Bayonet {
         this.rules_triggered = response.getRulesTriggered();
         this.risk_level = response.getRiskLevel();
         this.payload = response.getPayloadAsMap();
+    }
+
+    public void feedback(EcommerceFeedbackRequest params) throws BayonetException {
+        if(params == null)
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
+        resetClass();
+        // add auth info to the params
+        params.setApiKey(api_key);
+
+        // send the request
+        HttpHelper http_helper = new HttpHelper();
+        http_helper.request(params, "feedback", api_version);
+        this.http_response_code = http_helper.getResponseCode();
+        String response_json = http_helper.getResponseJson();
+        BaseResponse response = new Gson().fromJson(response_json, BaseResponse.class);
+        this.reason_code = response.getReason_code();
+        this.reason_message = response.getReason_message();
+    }
+
+    public void feedbackHistorical(EcommerceFeedbackHistoricalRequest params) throws BayonetException {
+        if(params == null)
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
+        resetClass();
+        // add auth info to the params
+        params.setApiKey(api_key);
+
+        // send the request
+        HttpHelper http_helper = new HttpHelper();
+        http_helper.request(params, "feedback-historical", api_version);
+        this.http_response_code = http_helper.getResponseCode();
+        String response_json = http_helper.getResponseJson();
+        BaseResponse response = new Gson().fromJson(response_json, BaseResponse.class);
+        this.reason_code = response.getReason_code();
+        this.reason_message = response.getReason_message();
     }
 
     private void resetClass() {

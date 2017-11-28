@@ -44,7 +44,6 @@ public class HttpHelper {
             throw new BayonetException(-1, "Internal SDK error. The Http client implementation is incorrect. Please contact the Bayonet team", -1);
         // parse the params to json
         String params_as_json = new Gson().toJson(params);
-        System.out.println(params_as_json);
         // API full url
         String url = BASE_URL + api_version + "/" + route;
 
