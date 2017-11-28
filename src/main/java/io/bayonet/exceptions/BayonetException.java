@@ -17,21 +17,18 @@ public class BayonetException extends Exception {
     private String reason_message;
 
 
+    /** Http response code */
+
+    private Integer http_response_code;
+
+
     /**
      * Constructors
      */
-    public BayonetException(Integer reason_code, String reason_message) {
+    public BayonetException(Integer reason_code, String reason_message, Integer http_response_code) {
         this.reason_code = reason_code;
         this.reason_message = reason_message;
-    }
-
-    public BayonetException(String reason_code, String reason_message) {
-        try {
-            this.reason_code = Integer.parseInt(reason_code);
-        } catch (NumberFormatException e) {
-            this.reason_code = -1;
-        }
-        this.reason_message = reason_message;
+        this.http_response_code = http_response_code;
     }
 
 
@@ -44,5 +41,9 @@ public class BayonetException extends Exception {
 
     public String getReasonMessage() {
         return reason_message;
+    }
+
+    public Integer getHttpResponseCode() {
+        return http_response_code;
     }
 }

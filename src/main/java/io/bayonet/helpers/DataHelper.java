@@ -1,12 +1,8 @@
 package io.bayonet.helpers;
 
-import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
 import io.bayonet.exceptions.BayonetException;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -27,7 +23,7 @@ public class DataHelper {
      */
     public static void validateApiKey(String api_key) throws BayonetException {
         if(api_key == null || api_key.isEmpty())
-            throw new BayonetException(-1, "Please provide an Api key");
+            throw new BayonetException(-1, "Please provide an Api key", -1);
     }
 
 
@@ -43,17 +39,11 @@ public class DataHelper {
     public static void validateApiVersion(String api_version, HashSet<String> supported_versions) throws BayonetException {
         // check if version is valid
         if(api_version == null || api_version.isEmpty())
-            throw new BayonetException(-1, "Please provide an Api version");
+            throw new BayonetException(-1, "Please provide an Api version", -1);
         // check if version is supported
         if(!supported_versions.contains(api_version))
-            throw new BayonetException(-1, "This SDK does not support the API version specified. Supported versions are : " + getCommaSeparatedStringFromCollection(supported_versions));
+            throw new BayonetException(-1, "This SDK does not support the API version specified. Supported versions are : " + getCommaSeparatedStringFromCollection(supported_versions), -1);
     }
-
-
-    public static LinkedTreeMap getMapFromJson(String json) {
-        return new Gson().fromJson(json, LinkedTreeMap.class);
-    }
-
 
     /**
      * Helper function to build a comma separated string from a collection
@@ -73,14 +63,5 @@ public class DataHelper {
             comma = ",";
         }
         return collection_string_builder.toString();
-    }
-
-
-    public static HashMap<String, Object> getMap(Object obj) throws IllegalAccessException {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        for (Field field : obj.getClass().getDeclaredFields()) {
-            map.put(field.getName(), field.get(obj));
-        }
-        return map;
     }
 }

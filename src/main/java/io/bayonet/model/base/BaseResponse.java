@@ -9,4 +9,12 @@ public class BaseResponse {
     protected Integer reason_code;
 
     protected String reason_message;
+
+    public Integer getReason_code() {
+        return reason_code;
+    }
+
+    public String getReason_message() {
+        return reason_message;
+    }
 }

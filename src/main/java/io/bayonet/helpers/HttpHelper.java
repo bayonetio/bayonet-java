@@ -31,13 +31,17 @@ public class HttpHelper {
 
     private static final String USER_AGENT = "OfficialBayonetJavaSDK";
 
-    public static String request(Object params, String route, String api_version) throws BayonetException {
+    private int response_code;
+
+    private String response_json;
+
+    public void request(Object params, String route, String api_version) throws BayonetException {
 
         // check if params and route are present
         if(params == null)
-            throw new BayonetException(-1, "params sent to the post request cannot be null");
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         if(route == null)
-            throw new BayonetException(-1, "Internal SDK error. The Http client implementation is incorrect. Please contact the Bayonet team");
+            throw new BayonetException(-1, "Internal SDK error. The Http client implementation is incorrect. Please contact the Bayonet team", -1);
         // parse the params to json
         String params_as_json = new Gson().toJson(params);
         System.out.println(params_as_json);
@@ -77,22 +81,21 @@ public class HttpHelper {
                 response.append(inputLine);
             }
             in.close();
-            String response_json_string = response.toString();
+            this.response_code = response_code;
+            this.response_json = response.toString();
 
-            JsonObject response_json_object = new JsonParser().parse(response_json_string).getAsJsonObject();
-            //LinkedTreeMap response_map = DataHelper.getMapFromJson(response_json);
-            // throw Bayonet exception with the received error code and error message if API call failed
-            if(response_code!= 200) {
-                if(response_json_object.has("reason_code") && response_json_object.has("reason_message")) {
-                    throw new BayonetException(response_json_object.get("reason_code").getAsInt(), response_json_object.get("reason_message").toString());
-                }
-            }
-
-            return response_json_string;
 
 
         } catch (IOException e) {
-            throw new BayonetException(-1, "POST request to the Bayonet API endpoint (" + url + ") failed with the following error :\n" + e.getMessage());
+            throw new BayonetException(-1, "POST request to the Bayonet API endpoint (" + url + ") failed with the following error :\n" + e.getMessage(), -1);
         }
+    }
+
+    public int getResponseCode() {
+        return response_code;
+    }
+
+    public String getResponseJson() {
+        return response_json;
     }
 }
