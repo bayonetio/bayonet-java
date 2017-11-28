@@ -28,10 +28,25 @@ public class HttpHelper {
 
     private static final String USER_AGENT = "OfficialBayonetJavaSDK";
 
+
+    /** Http response code */
+
     private int response_code;
+
+
+    /** Response JSON returned by the API */
 
     private String response_json;
 
+
+
+    /**
+     * Handler to send POST requests
+     * @param params POST request parameters to be sent in the JSON payload
+     * @param route API route to connect to
+     * @param api_version API version to connect to
+     * @throws BayonetException if the API returns an error
+     */
     public void request(Object params, String route, String api_version) throws BayonetException {
 
         // check if params and route are present
@@ -41,10 +56,11 @@ public class HttpHelper {
             throw new BayonetException(-1, "Internal SDK error. The Http client implementation is incorrect. Please contact the Bayonet team to report this bug", -1);
         // parse the params to json
         String params_as_json = new Gson().toJson(params);
-        // API full url
+        // Endpoint url to connect to
         String url = BASE_URL + api_version + "/" + route;
 
         try {
+            // build the Url object
             URL obj = new URL(url);
             HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
@@ -53,13 +69,14 @@ public class HttpHelper {
             con.setRequestProperty("User-Agent", USER_AGENT);
             con.setRequestProperty("Content-Type", "application/json");
 
-            // Send post request
+            // send post request
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(params_as_json);
             wr.flush();
             wr.close();
 
+            // get the response
             int response_code = con.getResponseCode();
             BufferedReader in;
             if(response_code == 200) {
@@ -77,16 +94,20 @@ public class HttpHelper {
                 response.append(inputLine);
             }
             in.close();
+
+            // set the response code and response json
             this.response_code = response_code;
             this.response_json = response.toString();
-
-
 
         } catch (IOException e) {
             throw new BayonetException(-1, "POST request to the Bayonet API endpoint (" + url + ") failed with the following error :\n" + e.getMessage(), -1);
         }
     }
 
+
+    /**
+     * Getters
+     */
     public int getResponseCode() {
         return response_code;
     }

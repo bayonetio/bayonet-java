@@ -1,4 +1,4 @@
-package io.bayonet.model.ecommerce.consulting;
+package io.bayonet.model.ecommerce;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package io.bayonet.model.ecommerce.consulting;
+package io.bayonet.model.ecommerce;
 
 import io.bayonet.model.base.Address;
 import io.bayonet.model.base.AuthModel;
