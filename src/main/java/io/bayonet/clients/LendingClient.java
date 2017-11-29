@@ -5,6 +5,8 @@ import io.bayonet.Bayonet;
 import io.bayonet.exceptions.BayonetException;
 import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.base.BaseResponse;
+import io.bayonet.model.lending.LendingConsultRequest;
+import io.bayonet.model.lending.LendingConsultResponse;
 import io.bayonet.model.lending.LendingFeedbackHistoricalRequest;
 import io.bayonet.model.lending.LendingFeedbackRequest;
 
@@ -48,6 +50,46 @@ public class LendingClient extends Bayonet {
 
     public LendingClient(String api_key, String api_version) throws BayonetException {
         super(api_key, api_version);
+    }
+
+
+    /**
+     * Handler for sending consulting API calls
+     *
+     * @param params POST request parameters to be sent in the JSON payload
+     * @throws BayonetException if the API returns an error
+     */
+    public void consult(LendingConsultRequest params) throws BayonetException {
+        if(params == null)
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
+        resetClass();
+        // add auth info to the params
+        params.setApiKey(api_key);
+
+        // send the request
+        HttpHelper http_helper = new HttpHelper();
+        http_helper.request(params, "lending/consult", api_version);
+        this.http_response_code = http_helper.getResponseCode();
+        String response_json = http_helper.getResponseJson();
+        if(response_json!= null ) {
+            // parse response if API call successful
+            if (this.http_response_code == 200) {
+
+                LendingConsultResponse consult_response = new Gson().fromJson(response_json, LendingConsultResponse.class);
+                if(consult_response.getReasonCode()!= null && consult_response.getReasonMessage()!= null) {
+                    this.reason_code = consult_response.getReasonCode();
+                    this.reason_message = consult_response.getReasonMessage();
+                    this.payload = consult_response.getPayloadAsMap();
+                }
+
+            } else if (this.http_response_code == 400 || this.http_response_code == 500) { // the API returns only 400 and 500 error codes
+                BaseResponse response = new Gson().fromJson(response_json, BaseResponse.class);
+                throw new BayonetException(response.getReason_code(), response.getReason_message(), this.http_response_code);
+            }
+        }
+        else {
+            throw new BayonetException(-1, "Could not fetch a response from the Bayonet API. Please try again after some time", -1);
+        }
     }
 
 
