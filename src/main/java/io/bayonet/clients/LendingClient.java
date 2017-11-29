@@ -5,8 +5,8 @@ import io.bayonet.Bayonet;
 import io.bayonet.exceptions.BayonetException;
 import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.base.BaseResponse;
-import io.bayonet.model.ecommerce.EcommerceFeedbackHistoricalRequest;
 import io.bayonet.model.lending.LendingFeedbackHistoricalRequest;
+import io.bayonet.model.lending.LendingFeedbackRequest;
 
 import java.util.HashMap;
 
@@ -73,6 +73,28 @@ public class LendingClient extends Bayonet {
     }
 
 
+    /**
+     * Handler for sending feedback API calls
+     * @param params POST request parameters to be sent in the JSON payload
+     * @throws BayonetException if the API returns an error
+     */
+    public void feedback(LendingFeedbackRequest params) throws BayonetException {
+        if(params == null)
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
+        resetClass();
+        // add auth info to the params
+        params.setApiKey(api_key);
+
+        // send the request
+        HttpHelper http_helper = new HttpHelper();
+        http_helper.request(params, "lending/feedback", api_version);
+        this.http_response_code = http_helper.getResponseCode();
+        String response_json = http_helper.getResponseJson();
+        // process the response
+        processGenericResponse(response_json);
+    }
+
+
 
     /**
      * Helper function to process the generic response JSON
@@ -105,5 +127,25 @@ public class LendingClient extends Bayonet {
         reason_code = null;
         reason_message = null;
         payload = null;
+    }
+
+
+    /**
+     * Getters
+     */
+    public Integer getHttpResponseCode() {
+        return http_response_code;
+    }
+
+    public Integer getReasonCode() {
+        return reason_code;
+    }
+
+    public String getReasonMessage() {
+        return reason_message;
+    }
+
+    public HashMap<String, Object> getPayload() {
+        return payload;
     }
 }
