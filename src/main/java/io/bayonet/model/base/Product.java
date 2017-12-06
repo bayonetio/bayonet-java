@@ -3,7 +3,8 @@ package io.bayonet.model.base;
 /**
  * Created by imranarshad on 8/16/17.
  *
- * pojo to represent a product that the customer is trying to buy
+ * model to represent a product that the customer is trying to buy
+ *  - used by the ecommerce endpoints
  */
 
 public class Product {
@@ -11,25 +12,27 @@ public class Product {
 
     /** Client's internal product ID - item id, sku, etc. */
 
-    String product_id;
+    private String product_id;
 
 
     /** Name of the product */
 
-    String product_name;
+    private String product_name;
 
 
     /** Product price */
 
-    Double product_price;
+    private Double product_price;
 
 
     /** Product category */
 
-    String product_category;
+    private String product_category;
+
+
 
     /**
-     * Getter and Setter methods
+     * Setters
      */
     public Product setProductId(String product_id) {
         this.product_id = product_id;

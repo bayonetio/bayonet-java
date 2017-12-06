@@ -3,7 +3,7 @@ package io.bayonet.model.base;
 /**
  * Created by imranarshad on 7/10/17.
  *
- * pojo representing client authentication information
+ * model representing client authentication information
  */
 public class AuthModel {
 

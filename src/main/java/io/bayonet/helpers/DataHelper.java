@@ -8,7 +8,7 @@ import java.util.HashSet;
 /**
  * Created by imranarshad on 11/27/17
  *
- * Helper class to assist with all data operations, eg. parsing to JSON, data validations, etc.
+ * Helper class to assist with all data operations, eg. parsing JSON, data validations, etc.
  */
 
 public class DataHelper {

@@ -2,14 +2,27 @@ package io.bayonet.model.base;
 
 /**
  * Created by imranarshad on 11/27/17
+ *
+ * model representing the generic API response returned by Bayonet APIs
+ *
  */
 
 public class BaseResponse {
 
-    protected Integer reason_code;
+    /** Reason code returned by the API */
 
-    protected String reason_message;
+    private Integer reason_code;
 
+
+    /** Reason message / error message returned by the API */
+
+    private String reason_message;
+
+
+
+    /**
+     * Getters
+     */
     public Integer getReason_code() {
         return reason_code;
     }
