@@ -42,10 +42,9 @@ public class LendingClient extends Bayonet {
      *
      * @param api_key client api key
      * @param api_version Bayonet api version to connect to
-     * @throws BayonetException if error occurs while setting up the client
      */
 
-    public LendingClient(String api_key, String api_version) throws BayonetException {
+    public LendingClient(String api_key, String api_version) {
         super(api_key, api_version);
     }
 
@@ -58,7 +57,7 @@ public class LendingClient extends Bayonet {
      * @param params POST request parameters to be sent in the JSON payload
      * @throws BayonetException if the API returns an error
      */
-    public void reportTransaction(LendingTransactionListenerRequest params) throws BayonetException {
+    public void reportTransaction(LendingReportTransactionRequest params) throws BayonetException {
         // validate client config
         this.validateClientConfig();
         if(params == null)
@@ -84,7 +83,7 @@ public class LendingClient extends Bayonet {
      * @param params POST request parameters to be sent in the JSON payload
      * @throws BayonetException if the API returns an error
      */
-    public void reportTransactionAndConsult(LendingTransactionListenerRequest params) throws BayonetException {
+    public void reportTransactionAndConsult(LendingReportTransactionRequest params) throws BayonetException {
         // validate client config
         this.validateClientConfig();
         if(params == null)

@@ -42,7 +42,7 @@ public class Bayonet {
      *
      * @throws BayonetException if client configuration is invalid
      */
-    public void validateClientConfig() throws BayonetException {
+    protected void validateClientConfig() throws BayonetException {
         // validate api key
         DataHelper.validateApiKey(api_key);
         // validate api version

@@ -7,7 +7,7 @@ import io.bayonet.model.base.AuthModel;
  * Created by imranarshad on 11/28/17
  */
 
-public class LendingTransactionListenerRequest {
+public class LendingReportTransactionRequest {
 
     /** Auth info of the client */
 
@@ -96,77 +96,77 @@ public class LendingTransactionListenerRequest {
         this.auth = new AuthModel(api_key);
     }
 
-    public LendingTransactionListenerRequest setEmail(String email) {
+    public LendingReportTransactionRequest setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public LendingTransactionListenerRequest setConsumerName(String consumer_name) {
+    public LendingReportTransactionRequest setConsumerName(String consumer_name) {
         this.consumer_name = consumer_name;
         return this;
     }
 
-    public LendingTransactionListenerRequest setConsumerInternalId(String consumer_internal_id) {
+    public LendingReportTransactionRequest setConsumerInternalId(String consumer_internal_id) {
         this.consumer_internal_id = consumer_internal_id;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTelephoneFixed(String telephone_fixed) {
+    public LendingReportTransactionRequest setTelephoneFixed(String telephone_fixed) {
         this.telephone_fixed = telephone_fixed;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTelephoneMobile(String telephone_mobile) {
+    public LendingReportTransactionRequest setTelephoneMobile(String telephone_mobile) {
         this.telephone_mobile = telephone_mobile;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTelephoneReference1(String telephone_reference_1) {
+    public LendingReportTransactionRequest setTelephoneReference1(String telephone_reference_1) {
         this.telephone_reference_1 = telephone_reference_1;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTelephoneReference2(String telephone_reference_2) {
+    public LendingReportTransactionRequest setTelephoneReference2(String telephone_reference_2) {
         this.telephone_reference_2 = telephone_reference_2;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTelephoneReference3(String telephone_reference_3) {
+    public LendingReportTransactionRequest setTelephoneReference3(String telephone_reference_3) {
         this.telephone_reference_3 = telephone_reference_3;
         return this;
     }
 
-    public LendingTransactionListenerRequest setRfc(String rfc) {
+    public LendingReportTransactionRequest setRfc(String rfc) {
         this.rfc = rfc;
         return this;
     }
 
-    public LendingTransactionListenerRequest setCurp(String curp) {
+    public LendingReportTransactionRequest setCurp(String curp) {
         this.curp = curp;
         return this;
     }
 
-    public LendingTransactionListenerRequest setAddress(Address address) {
+    public LendingReportTransactionRequest setAddress(Address address) {
         this.address = address;
         return this;
     }
 
-    public LendingTransactionListenerRequest setBayonetFingerprintToken(String bayonet_fingerprint_token) {
+    public LendingReportTransactionRequest setBayonetFingerprintToken(String bayonet_fingerprint_token) {
         this.bayonet_fingerprint_token = bayonet_fingerprint_token;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTransactionCategory(String transaction_category) {
+    public LendingReportTransactionRequest setTransactionCategory(String transaction_category) {
         this.transaction_category = transaction_category;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTransactionId(String transaction_id) {
+    public LendingReportTransactionRequest setTransactionId(String transaction_id) {
         this.transaction_id = transaction_id;
         return this;
     }
 
-    public LendingTransactionListenerRequest setTransactionTime(Long transaction_time) {
+    public LendingReportTransactionRequest setTransactionTime(Long transaction_time) {
         this.transaction_time = transaction_time;
         return this;
     }

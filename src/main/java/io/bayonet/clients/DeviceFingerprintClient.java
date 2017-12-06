@@ -8,7 +8,6 @@ import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.device_fingerprint.DeviceFingerprintRequest;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by imranarshad on 11/28/17
@@ -40,7 +39,7 @@ public class DeviceFingerprintClient extends Bayonet {
 
     /** Device info */
 
-    private Map<String, Object> device_info;
+    private HashMap<String, Object> device_info;
 
 
 
@@ -49,10 +48,9 @@ public class DeviceFingerprintClient extends Bayonet {
      *
      * @param api_key client api key
      * @param api_version Bayonet api version to connect to
-     * @throws BayonetException if error occurs while setting up the client
      */
 
-    public DeviceFingerprintClient(String api_key, String api_version) throws BayonetException {
+    public DeviceFingerprintClient(String api_key, String api_version) {
         super(api_key, api_version);
     }
 
@@ -79,7 +77,7 @@ public class DeviceFingerprintClient extends Bayonet {
         // process the response
         if(response_json!= null) {
             // generate a Map from the json
-            Map<String, Object> response_map = new Gson().fromJson(
+            HashMap<String, Object> response_map = new Gson().fromJson(
                     response_json, new TypeToken<HashMap<String, Object>>() {}.getType()
             );
             if(this.http_response_code == 200) {
@@ -133,7 +131,7 @@ public class DeviceFingerprintClient extends Bayonet {
         return bayonet_fingerprint;
     }
 
-    public Map<String, Object> getDeviceInfo() {
+    public HashMap<String, Object> getDeviceInfo() {
         return device_info;
     }
 }
