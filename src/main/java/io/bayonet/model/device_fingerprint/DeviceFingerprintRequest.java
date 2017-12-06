@@ -2,6 +2,8 @@ package io.bayonet.model.device_fingerprint;
 
 /**
  * Created by imranarshad on 11/28/17
+ *
+ * model representing the device fingerprint API request
  */
 
 public class DeviceFingerprintRequest {

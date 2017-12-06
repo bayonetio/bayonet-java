@@ -3,7 +3,7 @@ package io.bayonet.model.base;
 /**
  * Created by imranarshad on 11/8/17
  *
- * pojo to define the actions sent by the clients using the lending API
+ * model to define the actions sent by the clients using the lending API
  */
 
 public class Actions {

@@ -5,10 +5,7 @@ import io.bayonet.Bayonet;
 import io.bayonet.exceptions.BayonetException;
 import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.base.BaseResponse;
-import io.bayonet.model.lending.LendingConsultRequest;
-import io.bayonet.model.lending.LendingConsultResponse;
-import io.bayonet.model.lending.LendingFeedbackHistoricalRequest;
-import io.bayonet.model.lending.LendingFeedbackRequest;
+import io.bayonet.model.lending.*;
 
 import java.util.HashMap;
 
@@ -54,7 +51,56 @@ public class LendingClient extends Bayonet {
 
 
     /**
-     * Handler for sending consulting API calls
+     * Handler for sending transaction listener API calls
+     *  the transaction listener is for sending solicitudes at the moment they are received
+     *   the listener does not send any response about a persona's info, it only listens to the transactions
+     *
+     * @param params POST request parameters to be sent in the JSON payload
+     * @throws BayonetException if the API returns an error
+     */
+    public void reportTransaction(LendingTransactionListenerRequest params) throws BayonetException {
+        if(params == null)
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
+        resetClass();
+        // add auth info to the params
+        params.setApiKey(api_key);
+
+        // send the request
+        HttpHelper http_helper = new HttpHelper();
+        http_helper.request(params, "lending/transaction/report", api_version);
+        this.http_response_code = http_helper.getResponseCode();
+        String response_json = http_helper.getResponseJson();
+        // process the response
+        processGenericResponse(response_json);
+    }
+
+
+    /**
+     * Handler for sending transaction listener API calls - and consult at the same time
+     *  the only difference between this method and the reportTransaction method is that this method also generates a consult at the same time
+     *
+     * @param params POST request parameters to be sent in the JSON payload
+     * @throws BayonetException if the API returns an error
+     */
+    public void reportTransactionAndConsult(LendingTransactionListenerRequest params) throws BayonetException {
+        if(params == null)
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
+        resetClass();
+        // add auth info to the params
+        params.setApiKey(api_key);
+
+        // send the request
+        HttpHelper http_helper = new HttpHelper();
+        http_helper.request(params, "lending/transaction/report?consult=true", api_version);
+        this.http_response_code = http_helper.getResponseCode();
+        String response_json = http_helper.getResponseJson();
+        processConsultResponse(response_json);
+    }
+
+
+    /**
+     * Handler for sending transaction listener API calls - and consult at the same time
+     *  the only difference between this method and the reportTransaction method is that this method also generates a consult at the same time
      *
      * @param params POST request parameters to be sent in the JSON payload
      * @throws BayonetException if the API returns an error
@@ -71,25 +117,29 @@ public class LendingClient extends Bayonet {
         http_helper.request(params, "lending/consult", api_version);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
-        if(response_json!= null ) {
-            // parse response if API call successful
-            if (this.http_response_code == 200) {
+        processConsultResponse(response_json);
+    }
 
-                LendingConsultResponse consult_response = new Gson().fromJson(response_json, LendingConsultResponse.class);
-                if(consult_response.getReasonCode()!= null && consult_response.getReasonMessage()!= null) {
-                    this.reason_code = consult_response.getReasonCode();
-                    this.reason_message = consult_response.getReasonMessage();
-                    this.payload = consult_response.getPayloadAsMap();
-                }
 
-            } else if (this.http_response_code == 400 || this.http_response_code == 500) { // the API returns only 400 and 500 error codes
-                BaseResponse response = new Gson().fromJson(response_json, BaseResponse.class);
-                throw new BayonetException(response.getReason_code(), response.getReason_message(), this.http_response_code);
-            }
-        }
-        else {
-            throw new BayonetException(-1, "Could not fetch a response from the Bayonet API. Please try again after some time", -1);
-        }
+    /**
+     * Handler for sending feedback API calls
+     * @param params POST request parameters to be sent in the JSON payload
+     * @throws BayonetException if the API returns an error
+     */
+    public void feedback(LendingFeedbackRequest params) throws BayonetException {
+        if(params == null)
+            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
+        resetClass();
+        // add auth info to the params
+        params.setApiKey(api_key);
+
+        // send the request
+        HttpHelper http_helper = new HttpHelper();
+        http_helper.request(params, "lending/feedback", api_version);
+        this.http_response_code = http_helper.getResponseCode();
+        String response_json = http_helper.getResponseJson();
+        // process the response
+        processGenericResponse(response_json);
     }
 
 
@@ -116,31 +166,8 @@ public class LendingClient extends Bayonet {
 
 
     /**
-     * Handler for sending feedback API calls
-     * @param params POST request parameters to be sent in the JSON payload
-     * @throws BayonetException if the API returns an error
-     */
-    public void feedback(LendingFeedbackRequest params) throws BayonetException {
-        if(params == null)
-            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
-        resetClass();
-        // add auth info to the params
-        params.setApiKey(api_key);
-
-        // send the request
-        HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, "lending/feedback", api_version);
-        this.http_response_code = http_helper.getResponseCode();
-        String response_json = http_helper.getResponseJson();
-        // process the response
-        processGenericResponse(response_json);
-    }
-
-
-
-    /**
      * Helper function to process the generic response JSON
-     *  - feedback and feedback-historical API endpoints return a generic response that contains only a reason_code and a reason_message
+     *  feedback and feedback-historical API endpoints return a generic response that contains only a reason_code and a reason_message
      * @param response_json JSON to process
      * @throws BayonetException if the API returns an error
      */
@@ -160,10 +187,40 @@ public class LendingClient extends Bayonet {
     }
 
 
+    /**
+     * Helper function to process the consult response JSON
+     *  consult and transaction_listener_with_consult API endpoints return a response that contains persona information
+     *  we use a model to parse this response so the SDK user can get the entire response payload as a nested map
+     *
+     * @param response_json JSON to process
+     * @throws BayonetException if the API returns an error
+     */
+    private void processConsultResponse(String response_json) throws BayonetException {
+        if(response_json!= null ) {
+            // parse response if API call successful
+            if (this.http_response_code == 200) {
+
+                LendingConsultResponse consult_response = new Gson().fromJson(response_json, LendingConsultResponse.class);
+                if(consult_response.getReasonCode()!= null && consult_response.getReasonMessage()!= null) {
+                    this.reason_code = consult_response.getReasonCode();
+                    this.reason_message = consult_response.getReasonMessage();
+                    this.payload = consult_response.getPayloadAsMap();
+                }
+
+            } else if (this.http_response_code == 400 || this.http_response_code == 500) { // the API returns only 400 and 500 error codes
+                BaseResponse response = new Gson().fromJson(response_json, BaseResponse.class);
+                throw new BayonetException(response.getReason_code(), response.getReason_message(), this.http_response_code);
+            }
+        }
+        else {
+            throw new BayonetException(-1, "Could not fetch a response from the Bayonet API. Please try again after some time", -1);
+        }
+    }
+
 
     /**
      * Helper function to reset the member variables of the class
-     *  - this ensured that the clients do not reuse a response between 2 successive calls using the same client object
+     *  this ensures that the clients do not reuse a response between 2 successive calls using the same client object
      */
     private void resetClass() {
         reason_code = null;
@@ -187,7 +244,7 @@ public class LendingClient extends Bayonet {
         return reason_message;
     }
 
-    public HashMap<String, Object> getPayload() {
+    public HashMap<String, Object> getResponsePayload() {
         return payload;
     }
 }

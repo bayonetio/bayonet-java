@@ -8,7 +8,7 @@ import java.util.HashSet;
  * Created by imranarshad on 5/3/16.
  *
  */
-public class OutputPayload {
+class OutputPayload {
 
 
     /** Persona timestamp information */
@@ -71,7 +71,7 @@ public class OutputPayload {
     private SocialProfileModel social_profiles;
 
 
-    public HashMap<String, Object> getPayloadAsMap() throws IllegalAccessException {
+    HashMap<String, Object> getPayloadAsMap() throws IllegalAccessException {
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("timestamps", timestamps.getMap());
         map.put("recent_activity", recent_activity.getMap());
@@ -89,14 +89,14 @@ public class OutputPayload {
     }
 
     /**
-     * Static nested classes that build the Output Payload
+     * Nested classes that build the output payload
      */
 
-    static class Timestamps {
-        private Long first_seen_on_network;
-        private Long last_seen_on_network;
-        private Long first_seen_on_client;
-        private Long last_seen_on_client;
+    class Timestamps {
+        Long first_seen_on_network;
+        Long last_seen_on_network;
+        Long first_seen_on_client;
+        Long last_seen_on_client;
 
         HashMap<String, Object> getMap() throws IllegalAccessException {
             HashMap<String, Object> map = new HashMap<String, Object>();
@@ -107,7 +107,7 @@ public class OutputPayload {
         }
     }
 
-    static class VelocityModel {
+    class VelocityModel {
         VelocitySubModel orders_last_15_mins;
         VelocitySubModel orders_last_30_mins;
         VelocitySubModel orders_last_hour;
@@ -123,12 +123,12 @@ public class OutputPayload {
         }
     }
 
-    static class VelocitySubModel {
-        private Integer total;
-        private Integer successful;
-        private Integer suspected_fraud_declines;
-        private Integer bank_declines;
-        private Integer unique_sites;
+    class VelocitySubModel {
+        Integer total;
+        Integer successful;
+        Integer suspected_fraud_declines;
+        Integer bank_declines;
+        Integer unique_sites;
 
         HashMap<String, Object> getMap() throws IllegalAccessException {
             HashMap<String, Object> map = new HashMap<String, Object>();
@@ -140,11 +140,11 @@ public class OutputPayload {
 
     }
 
-    static class LabeledParameters {
-        private Integer blocked_by_network;
-        private Integer blocked_by_client;
-        private Integer whitelisted_by_network;
-        private Integer whitelisted_by_client;
+    class LabeledParameters {
+        Integer blocked_by_network;
+        Integer blocked_by_client;
+        Integer whitelisted_by_network;
+        Integer whitelisted_by_client;
 
         HashMap<String, Object> getMap() throws IllegalAccessException {
             HashMap<String, Object> map = new HashMap<String, Object>();
@@ -155,7 +155,7 @@ public class OutputPayload {
         }
     }
 
-    static class Transactions {
+    class Transactions {
 
         Successful successful;
         Declined declined;
@@ -171,14 +171,14 @@ public class OutputPayload {
             return map;
         }
 
-        static class Successful {
-            private Integer total;
-            private Integer with_card_total;
-            private Integer with_card_last_14_days;
-            private Integer with_card_last_30_days;
-            private Integer offline_total;
-            private Integer offline_last_14_days;
-            private Integer offline_last_30_days;
+        class Successful {
+            Integer total;
+            Integer with_card_total;
+            Integer with_card_last_14_days;
+            Integer with_card_last_30_days;
+            Integer offline_total;
+            Integer offline_last_14_days;
+            Integer offline_last_30_days;
 
             HashMap<String, Object> getMap() throws IllegalAccessException {
                 HashMap<String, Object> map = new HashMap<String, Object>();
@@ -189,17 +189,17 @@ public class OutputPayload {
             }
         }
 
-        static class Declined {
-            private Integer total;
-            private Integer suspected_fraud_total;
-            private Integer suspected_fraud_last_14_days;
-            private Integer suspected_fraud_last_30_days;
-            private Integer bank_declines_total;
-            private Integer bank_declines_last_14_days;
-            private Integer bank_declines_last_30_days;
-            private Integer using_stolen_card_total;
-            private Integer using_stolen_card_last_14_days;
-            private Integer using_stolen_card_last_30_days;
+        class Declined {
+            Integer total;
+            Integer suspected_fraud_total;
+            Integer suspected_fraud_last_14_days;
+            Integer suspected_fraud_last_30_days;
+            Integer bank_declines_total;
+            Integer bank_declines_last_14_days;
+            Integer bank_declines_last_30_days;
+            Integer using_stolen_card_total;
+            Integer using_stolen_card_last_14_days;
+            Integer using_stolen_card_last_30_days;
 
             HashMap<String, Object> getMap() throws IllegalAccessException {
                 HashMap<String, Object> map = new HashMap<String, Object>();
@@ -210,10 +210,10 @@ public class OutputPayload {
             }
         }
 
-        static class Chargebacks {
-            private Integer total;
-            private Integer last_14_days;
-            private Integer last_30_days;
+        class Chargebacks {
+            Integer total;
+            Integer last_14_days;
+            Integer last_30_days;
 
             HashMap<String, Object> getMap() throws IllegalAccessException {
                 HashMap<String, Object> map = new HashMap<String, Object>();
@@ -224,10 +224,10 @@ public class OutputPayload {
             }
         }
 
-        static class ExpeditedShipping {
-            private Integer total;
-            private Integer last_14_days;
-            private Integer last_30_days;
+        class ExpeditedShipping {
+            Integer total;
+            Integer last_14_days;
+            Integer last_30_days;
 
             HashMap<String, Object> getMap() throws IllegalAccessException {
                 HashMap<String, Object> map = new HashMap<String, Object>();
@@ -239,15 +239,15 @@ public class OutputPayload {
         }
     }
 
-    static class PersonaParams {
-        private Integer total;
-        private Integer blocked_by_network;
-        private Integer blocked_by_client;
-        private Integer whitelisted_by_network;
-        private Integer whitelisted_by_client;
-        private Integer with_successful_transactions;
-        private Integer with_suspected_fraud_declines;
-        private Integer with_chargebacks;
+    class PersonaParams {
+        Integer total;
+        Integer blocked_by_network;
+        Integer blocked_by_client;
+        Integer whitelisted_by_network;
+        Integer whitelisted_by_client;
+        Integer with_successful_transactions;
+        Integer with_suspected_fraud_declines;
+        Integer with_chargebacks;
 
         HashMap<String, Object> getMap() throws IllegalAccessException {
             HashMap<String, Object> map = new HashMap<String, Object>();
@@ -258,16 +258,16 @@ public class OutputPayload {
         }
     }
 
-    static class PersonaParamsWithStolen {
-        private Integer total;
-        private Integer reported_as_stolen;
-        private Integer blocked_by_network;
-        private Integer blocked_by_client;
-        private Integer whitelisted_by_network;
-        private Integer whitelisted_by_client;
-        private Integer with_successful_transactions;
-        private Integer with_suspected_fraud_declines;
-        private Integer with_chargebacks;
+    class PersonaParamsWithStolen {
+        Integer total;
+        Integer reported_as_stolen;
+        Integer blocked_by_network;
+        Integer blocked_by_client;
+        Integer whitelisted_by_network;
+        Integer whitelisted_by_client;
+        Integer with_successful_transactions;
+        Integer with_suspected_fraud_declines;
+        Integer with_chargebacks;
 
         HashMap<String, Object> getMap() throws IllegalAccessException {
             HashMap<String, Object> map = new HashMap<String, Object>();
@@ -278,19 +278,19 @@ public class OutputPayload {
         }
     }
 
-    static class DeviceInformation {
-        private String country;
-        private String city;
-        private Boolean is_in_multiple_timezones;
-        private Boolean is_blocking_ads;
-        private Boolean is_blocking_cookies;
-        private Boolean is_blocking_javascript;
-        private Boolean is_browser_spoofed;
-        private Boolean is_bot_detected;
-        private Boolean is_using_tor;
-        private Boolean is_using_do_not_track;
-        private Boolean is_browser_incognito;
-        private Boolean is_using_proxy;
+    class DeviceInformation {
+        String country;
+        String city;
+        Boolean is_in_multiple_timezones;
+        Boolean is_blocking_ads;
+        Boolean is_blocking_cookies;
+        Boolean is_blocking_javascript;
+        Boolean is_browser_spoofed;
+        Boolean is_bot_detected;
+        Boolean is_using_tor;
+        Boolean is_using_do_not_track;
+        Boolean is_browser_incognito;
+        Boolean is_using_proxy;
 
         HashMap<String, Object> getMap() throws IllegalAccessException {
             HashMap<String, Object> map = new HashMap<String, Object>();
@@ -301,23 +301,23 @@ public class OutputPayload {
         }
     }
 
-    static class SocialProfileModel {
+    class SocialProfileModel {
 
-        private Integer total;
-        private HashSet<String> facebook;
-        private HashSet<String> twitter;
-        private HashSet<String> instagram;
-        private HashSet<String> linkedin;
-        private HashSet<String> github;
-        private HashSet<String> foursquare;
-        private HashSet<String> google;
-        private HashSet<String> pinterest;
-        private HashSet<String> reddit;
-        private HashSet<String> angel_list;
-        private HashSet<String> behance;
-        private HashSet<String> quora;
-        private HashSet<String> skype;
-        private HashSet<String> youtube;
+        Integer total;
+        HashSet<String> facebook;
+        HashSet<String> twitter;
+        HashSet<String> instagram;
+        HashSet<String> linkedin;
+        HashSet<String> github;
+        HashSet<String> foursquare;
+        HashSet<String> google;
+        HashSet<String> pinterest;
+        HashSet<String> reddit;
+        HashSet<String> angel_list;
+        HashSet<String> behance;
+        HashSet<String> quora;
+        HashSet<String> skype;
+        HashSet<String> youtube;
 
         HashMap<String, Object> getMap() throws IllegalAccessException {
             HashMap<String, Object> map = new HashMap<String, Object>();

@@ -3,17 +3,41 @@ package io.bayonet.model.base;
 /**
  * Created by imranarshad on 4/13/16.
  *
- * pojo to map the Address of a consumer
+ * model to map the Address of a consumer
  *
- * The class variables are self-explanatory - no more helpful comments after this!! :)
  */
 public class Address {
+
+    /** Address line 1 */
+
     private String line_1;
+
+
+    /** Address line 2 */
+
     private String line_2;
+
+
+    /** City */
+
     private String city;
+
+
+    /** State */
+
     private String state;
+
+
+    /** Country - 3 letter ISO country code */
+
     private String country;
+
+
+    /** Zip code */
+
     private String zip_code;
+
+
 
     /**
      * Getters and Setters
