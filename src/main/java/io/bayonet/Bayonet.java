@@ -30,14 +30,22 @@ public class Bayonet {
     protected String api_version;
 
 
-    public Bayonet(String api_key, String api_version) throws BayonetException {
-        // validate Api key
-        DataHelper.validateApiKey(api_key);
-        // validate Api version
-        DataHelper.validateApiVersion(api_version, SUPPORTED_API_VERSIONS);
-
+    public Bayonet(String api_key, String api_version) {
         // set the api key and version
         this.api_key = api_key;
         this.api_version = api_version;
+    }
+
+
+    /**
+     * Helper function to validate client configuration
+     *
+     * @throws BayonetException if client configuration is invalid
+     */
+    public void validateClientConfig() throws BayonetException {
+        // validate api key
+        DataHelper.validateApiKey(api_key);
+        // validate api version
+        DataHelper.validateApiVersion(api_version, SUPPORTED_API_VERSIONS);
     }
 }

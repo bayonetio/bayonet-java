@@ -23,7 +23,7 @@ public class DataHelper {
      */
     public static void validateApiKey(String api_key) throws BayonetException {
         if(api_key == null || api_key.isEmpty())
-            throw new BayonetException(-1, "Please provide an Api key", -1);
+            throw new BayonetException(-1, "Invalid client configuration. Please provide an Api key", -1);
     }
 
 
@@ -42,7 +42,7 @@ public class DataHelper {
             throw new BayonetException(-1, "Please provide an Api version", -1);
         // check if version is supported
         if(!supported_versions.contains(api_version))
-            throw new BayonetException(-1, "This SDK does not support the API version specified. Supported versions are : " + getCommaSeparatedStringFromCollection(supported_versions), -1);
+            throw new BayonetException(-1, "Invalid client configuration. This SDK does not support the API version specified. Supported versions are : " + getCommaSeparatedStringFromCollection(supported_versions), -1);
     }
 
     /**

@@ -63,6 +63,8 @@ public class DeviceFingerprintClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void queryFingerprintData(DeviceFingerprintRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();

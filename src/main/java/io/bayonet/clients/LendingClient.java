@@ -59,6 +59,8 @@ public class LendingClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void reportTransaction(LendingTransactionListenerRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -83,6 +85,8 @@ public class LendingClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void reportTransactionAndConsult(LendingTransactionListenerRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -106,6 +110,8 @@ public class LendingClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void consult(LendingConsultRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -127,6 +133,8 @@ public class LendingClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void feedback(LendingFeedbackRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -149,6 +157,8 @@ public class LendingClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void feedbackHistorical(LendingFeedbackHistoricalRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();

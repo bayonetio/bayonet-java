@@ -58,10 +58,9 @@ public class EcommerceClient extends Bayonet {
      *
      * @param api_key client api key
      * @param api_version Bayonet api version to connect to
-     * @throws BayonetException if error occurs while setting up the client
      */
 
-    public EcommerceClient(String api_key, String api_version) throws BayonetException {
+    public EcommerceClient(String api_key, String api_version) {
         super(api_key, api_version);
     }
 
@@ -73,6 +72,8 @@ public class EcommerceClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void consulting(EcommerceConsultingRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -117,6 +118,8 @@ public class EcommerceClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void feedback(EcommerceFeedbackRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -139,6 +142,8 @@ public class EcommerceClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void feedbackHistorical(EcommerceFeedbackHistoricalRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -162,6 +167,8 @@ public class EcommerceClient extends Bayonet {
      * @throws BayonetException if the API returns an error
      */
     public void updateTransaction(EcommerceUpdateTransactionRequest params) throws BayonetException {
+        // validate client config
+        this.validateClientConfig();
         if(params == null)
             throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
         resetClass();
@@ -241,7 +248,7 @@ public class EcommerceClient extends Bayonet {
         return risk_level;
     }
 
-    public HashMap<String, Object> getPayload() {
+    public HashMap<String, Object> getResponsePayload() {
         return payload;
     }
 }
