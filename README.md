@@ -14,6 +14,22 @@ The examples shown in this README are only for demonstration of the functionalit
 To use this SDK, please make sure:
   * You have Java 1.6 or superior installed on your system.
   * You have an API KEY (sandbox and/or live) generated on your Bayonet console.
+  * Maven:
+  
+      ````sh
+      <dependency>
+        <groupId>io.bayonet</groupId>
+        <artifactId>BayonetJava</artifactId>
+        <version>2.0</version>
+      </dependency>
+      ````
+   * Gradle:
+      
+       ````sh
+       dependencies {
+           compile 'io.bayonet:BayonetJava:2.0'
+       }
+       ````
     
 ## Usage
 Once you have Bayonet's SDK configured, you can call the APIs with the following syntax (depending on whether you  are integrating for the Ecommerce product or the Lending product):
