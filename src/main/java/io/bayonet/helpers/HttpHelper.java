@@ -21,7 +21,7 @@ public class HttpHelper {
 
     /** API connection base url */
 
-    private static final String BASE_URL = "https://staging-api.bayonet.io/v";
+    private static final String BASE_URL = "https://api.bayonet.io/v";
 
 
     /** API connection base url for the device fingerprint product */
