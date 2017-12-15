@@ -16,18 +16,18 @@ To use this SDK, please make sure:
   * You have an API KEY (sandbox and/or live) generated on your Bayonet console.
   * Maven:
   
-      ````sh
+      ````xml
       <dependency>
         <groupId>io.bayonet</groupId>
-        <artifactId>BayonetJava</artifactId>
-        <version>2.0</version>
+        <artifactId>bayonet-java</artifactId>
+        <version>2.0.0</version>
       </dependency>
       ````
    * Gradle:
       
-       ````sh
+       ````
        dependencies {
-           compile 'io.bayonet:BayonetJava:2.0'
+           compile 'io.bayonet:bayonet-java:2.0.0'
        }
        ````
     
