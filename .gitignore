@@ -1,0 +1,16 @@
+*.swp
+.classpath
+.project
+.settings
+tags
+target
+.idea
+out
+
+# Gradle files
+.gradle/*
+settings.gradle
+build/*
+
+# Ignore test main class
+src/main/java/io/bayonet/Test.java
