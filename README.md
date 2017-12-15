@@ -30,6 +30,9 @@ To use this SDK, please make sure:
            compile 'io.bayonet:bayonet-java:2.0.0'
        }
        ````
+   * Manually:
+
+        You can also install the Bayonet SDK manually. Please downloaded the latest build from the [releases](https://github.com/bayonetio/bayonet-java/releases) page. The zip contains bayonet-java and Gson (that bayonet-java depends on). Make sure you add both JARs to your project
     
 ## Usage
 Once you have Bayonet's SDK configured, you can call the APIs with the following syntax (depending on whether you  are integrating for the Ecommerce product or the Lending product):
