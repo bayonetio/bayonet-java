@@ -516,3 +516,18 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
         System.out.println("Reason message: " + e.getReasonMessage());
     }
     ``` 
+    
+    ### Error Handling
+    Bayonet's SDK raises exceptions whenever calling an event. Make sure you use a `try-catch` block to avoid uncaught exceptions in production:
+
+    ```java
+    try {
+        client.EVENT(params);
+        // process the successful response
+    } catch (BayonetException e) {
+        // do something with the exception
+        System.out.println("error occurred");
+        System.out.println("Reason code: " + e.getReasonCode());
+        System.out.println("Reason message: " + e.getReasonMessage());
+    }
+    ```
