@@ -9,21 +9,16 @@ import java.util.HashMap;
  * Created by imranarshad on 11/27/17
  */
 
-public class ConsultingResponse extends BaseResponse {
-
-    /** Unique code returned by the Consulting API to be used on subsequent Feedback API calls */
-
-    private String feedback_api_trans_code;
-
+public class ConsultResponse extends BaseResponse {
 
     /** List of rules triggered by the persona consulted */
 
     private ArrayList<String> rules_triggered;
 
 
-    /** Risk level associated to the persona consulted */
+    /** Decision to be taken regarding the consulted transactions */
 
-    private String risk_level;
+    private String decision;
 
 
     /** Response payload returned by the consulting call */
@@ -34,16 +29,12 @@ public class ConsultingResponse extends BaseResponse {
     /**
      * Getters
      */
-    public String getFeedbackApiTransCode() {
-        return feedback_api_trans_code;
-    }
-
     public ArrayList<String> getRulesTriggered() {
         return rules_triggered;
     }
 
-    public String getRiskLevel() {
-        return risk_level;
+    public String getDecision() {
+        return decision;
     }
 
     public HashMap<String, Object> getPayloadAsMap() throws IllegalAccessException {

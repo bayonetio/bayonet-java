@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Created by imranarshad on 11/27/17
  */
 
-public class EcommerceConsultingRequest {
+public class EcommerceConsultRequest {
 
 
     /** Auth info of the client */
@@ -83,11 +83,6 @@ public class EcommerceConsultingRequest {
     private String payment_method;
 
 
-    /** Unix timestamp when the transaction occurred */
-
-    private Long transaction_time;
-
-
     /** The coupon code used by the customer */
 
     private String coupon;
@@ -118,6 +113,11 @@ public class EcommerceConsultingRequest {
     private String bayonet_fingerprint_token;
 
 
+    /** Internal id of a transaction maintained by the client (and not by Bayonet or the processing bank in question) */
+
+    private String transaction_id;
+
+
     /**
      * Getter and Setter methods
      */
@@ -126,103 +126,103 @@ public class EcommerceConsultingRequest {
         this.auth = new AuthModel(api_key);
     }
 
-    public EcommerceConsultingRequest setEmail(String email) {
+    public EcommerceConsultRequest setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public EcommerceConsultingRequest setConsumerName(String consumer_name) {
+    public EcommerceConsultRequest setConsumerName(String consumer_name) {
         this.consumer_name = consumer_name;
         return this;
     }
 
-    public EcommerceConsultingRequest setConsumerInternalId(String consumer_internal_id) {
+    public EcommerceConsultRequest setConsumerInternalId(String consumer_internal_id) {
         this.consumer_internal_id = consumer_internal_id;
         return this;
     }
 
-    public EcommerceConsultingRequest setCardholderName(String cardholder_name) {
+    public EcommerceConsultRequest setCardholderName(String cardholder_name) {
         this.cardholder_name = cardholder_name;
         return this;
     }
 
-    public EcommerceConsultingRequest setTelephone(String telephone) {
+    public EcommerceConsultRequest setTelephone(String telephone) {
         this.telephone = telephone;
         return this;
     }
 
-    public EcommerceConsultingRequest setCardNumber(String card_number) {
+    public EcommerceConsultRequest setCardNumber(String card_number) {
         this.card_number = card_number;
         return this;
     }
 
-    public EcommerceConsultingRequest setCardBin(String card_bin) {
+    public EcommerceConsultRequest setCardBin(String card_bin) {
         this.card_bin = card_bin;
         return this;
     }
 
-    public EcommerceConsultingRequest setCardLast4(String card_last_4) {
+    public EcommerceConsultRequest setCardLast4(String card_last_4) {
         this.card_last_4 = card_last_4;
         return this;
     }
 
-    public EcommerceConsultingRequest setTransactionAmount(Double transaction_amount) {
+    public EcommerceConsultRequest setTransactionAmount(Double transaction_amount) {
         this.transaction_amount = transaction_amount;
         return this;
     }
 
-    public EcommerceConsultingRequest setCurrencyCode(String currency_code) {
+    public EcommerceConsultRequest setCurrencyCode(String currency_code) {
         this.currency_code = currency_code;
         return this;
     }
 
-    public EcommerceConsultingRequest setShippingAddress(Address shipping_address) {
+    public EcommerceConsultRequest setShippingAddress(Address shipping_address) {
         this.shipping_address = shipping_address;
         return this;
     }
 
-    public EcommerceConsultingRequest setBillingAddress(Address billing_address) {
+    public EcommerceConsultRequest setBillingAddress(Address billing_address) {
         this.billing_address = billing_address;
         return this;
     }
 
-    public EcommerceConsultingRequest setPaymentMethod(String payment_method) {
+    public EcommerceConsultRequest setPaymentMethod(String payment_method) {
         this.payment_method = payment_method;
         return this;
     }
 
-    public EcommerceConsultingRequest setTransactionTime(Long transaction_time) {
-        this.transaction_time = transaction_time;
-        return this;
-    }
-
-    public EcommerceConsultingRequest setCoupon(String coupon) {
+    public EcommerceConsultRequest setCoupon(String coupon) {
         this.coupon = coupon;
         return this;
     }
 
-    public EcommerceConsultingRequest setExpeditedShipping(Boolean expedited_shipping) {
+    public EcommerceConsultRequest setExpeditedShipping(Boolean expedited_shipping) {
         this.expedited_shipping = expedited_shipping;
         return this;
     }
 
-    public EcommerceConsultingRequest setPaymentGateway(String payment_gateway) {
+    public EcommerceConsultRequest setPaymentGateway(String payment_gateway) {
         this.payment_gateway = payment_gateway;
         return this;
     }
 
-    public EcommerceConsultingRequest setChannel(String channel) {
+    public EcommerceConsultRequest setChannel(String channel) {
         this.channel = channel;
         return this;
     }
 
-    public EcommerceConsultingRequest setProducts(ArrayList<Product> products) {
+    public EcommerceConsultRequest setProducts(ArrayList<Product> products) {
         this.products = products;
         return this;
     }
 
-    public EcommerceConsultingRequest setBayonetFingerprintToken(String bayonet_fingerprint_token) {
+    public EcommerceConsultRequest setBayonetFingerprintToken(String bayonet_fingerprint_token) {
         this.bayonet_fingerprint_token = bayonet_fingerprint_token;
+        return this;
+    }
+
+    public EcommerceConsultRequest setTransactionId(String transaction_id) {
+        this.transaction_id = transaction_id;
         return this;
     }
 }

@@ -33,9 +33,9 @@ public class EcommerceUpdateTransactionRequest {
     private String chargeback_reason;
 
 
-    /** Timestamp when the transaction status changed */
+    /** Code sent back by the processing bank to the client when a transaction is processed */
 
-    private Long status_change_time;
+    private String bank_auth_code;
 
 
     /**
@@ -66,8 +66,8 @@ public class EcommerceUpdateTransactionRequest {
         return this;
     }
 
-    public EcommerceUpdateTransactionRequest setStatusChangeTime(Long status_change_time) {
-        this.status_change_time = status_change_time;
+    public EcommerceUpdateTransactionRequest setBankAuthCode(String bank_auth_code) {
+        this.bank_auth_code = bank_auth_code;
         return this;
     }
 }
