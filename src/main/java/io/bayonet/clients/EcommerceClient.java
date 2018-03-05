@@ -33,24 +33,24 @@ public class EcommerceClient extends Bayonet {
     private String reason_message;
 
 
-    /** Unique code returned by the consulting API that will be used in the feedback API call */
-
-    private String feedback_api_trans_code;
-
-
     /** List of rules triggered by the persona - only used on consulting API calls */
 
     private ArrayList<String> rules_triggered;
 
 
-    /** Risk level associated to the persona consulted - RED, GREEN or YELLOW - only used on consulting API calls */
+    /** Decision to be taken regarding the consulted transactions */
 
-    private String risk_level;
+    private String decision;
 
 
     /** Payload data included in the response - only used on consulting API calls */
 
     private HashMap<String, Object> payload;
+
+
+    /** Sub path for the API */
+
+    private final static String SUB_PATH = "sigma";
 
 
     /**
@@ -71,7 +71,7 @@ public class EcommerceClient extends Bayonet {
      * @param params POST request parameters to be sent in the JSON payload
      * @throws BayonetException if the API returns an error
      */
-    public void consulting(EcommerceConsultingRequest params) throws BayonetException {
+    public void consult(EcommerceConsultRequest params) throws BayonetException {
         // validate client config
         this.validateClientConfig();
         if(params == null)
@@ -82,18 +82,17 @@ public class EcommerceClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, "consulting", api_version);
+        http_helper.request(params, SUB_PATH + "/consult", api_version);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         if(response_json!= null ) {
             // parse response if API call successful
             if (this.http_response_code == 200) {
-                ConsultingResponse response = new Gson().fromJson(response_json, ConsultingResponse.class);
+                ConsultResponse response = new Gson().fromJson(response_json, ConsultResponse.class);
                 this.reason_code = response.getReason_code();
                 this.reason_message = response.getReason_message();
-                this.feedback_api_trans_code = response.getFeedbackApiTransCode();
                 this.rules_triggered = response.getRulesTriggered();
-                this.risk_level = response.getRiskLevel();
+                this.decision = response.getDecision();
                 // get the entire payload as a nested map
                 try {
                     this.payload = response.getPayloadAsMap();
@@ -113,30 +112,6 @@ public class EcommerceClient extends Bayonet {
 
 
     /**
-     * Handler for sending feedback API calls
-     * @param params POST request parameters to be sent in the JSON payload
-     * @throws BayonetException if the API returns an error
-     */
-    public void feedback(EcommerceFeedbackRequest params) throws BayonetException {
-        // validate client config
-        this.validateClientConfig();
-        if(params == null)
-            throw new BayonetException(-1, "params sent to the post request cannot be null", -1);
-        resetClass();
-        // add auth info to the params
-        params.setApiKey(api_key);
-
-        // send the request
-        HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, "feedback", api_version);
-        this.http_response_code = http_helper.getResponseCode();
-        String response_json = http_helper.getResponseJson();
-        // process the response
-        processGenericResponse(response_json);
-    }
-
-
-    /**
      * Handler for sending feedback-historical API calls
      * @param params POST request parameters to be sent in the JSON payload
      * @throws BayonetException if the API returns an error
@@ -152,7 +127,7 @@ public class EcommerceClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, "feedback-historical", api_version);
+        http_helper.request(params, SUB_PATH + "/feedback-historical", api_version);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response
@@ -177,7 +152,7 @@ public class EcommerceClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, "update-transaction", api_version);
+        http_helper.request(params, SUB_PATH + "/update-transaction", api_version);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response
@@ -214,9 +189,8 @@ public class EcommerceClient extends Bayonet {
     private void resetClass() {
         reason_code = null;
         reason_message = null;
-        feedback_api_trans_code = null;
         rules_triggered = null;
-        risk_level = null;
+        decision = null;
         payload = null;
     }
 
@@ -236,16 +210,12 @@ public class EcommerceClient extends Bayonet {
         return reason_message;
     }
 
-    public String getFeedbackApiTransCode() {
-        return feedback_api_trans_code;
-    }
-
     public ArrayList<String> getRulesTriggered() {
         return rules_triggered;
     }
 
-    public String getRiskLevel() {
-        return risk_level;
+    public String getDecision() {
+        return decision;
     }
 
     public HashMap<String, Object> getResponsePayload() {
