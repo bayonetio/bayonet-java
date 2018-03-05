@@ -58,14 +58,14 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
     /* Initialize the Ecommerce client with your Api key and Api version */
     EcommerceClient client = new EcommerceClient("<your api key>", "<api version>");
     
-    /* Build the consulting request */
+    /* Build the consult request */
     EcommerceConsultRequest params = new EcommerceConsultRequest()
             .setEmail("example@bayonet.io")
             .setConsumerName("Example name")
             .setConsumerInternalId("<your internal ID for this consumer>")
             .setCardholderName("Example name")
             .setTelephone("1234567890")
-            .setCardNumber("123456")
+            .setCardNumber("4242424242424242")
             .setTransactionAmount(100.00)
             .setCurrencyCode("MXN")
             .setPaymentMethod("card")
@@ -183,7 +183,7 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
             .setConsumerInternalId("<your internal ID for this consumer>")
             .setCardholderName("Example name")
             .setTelephone("1234567890")
-            .setCardNumber("123456")
+            .setCardNumber("4242424242424242")
             .setTransactionAmount(100.00)
             .setCurrencyCode("MXN")
             .setPaymentMethod("card")
