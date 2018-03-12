@@ -113,9 +113,14 @@ public class EcommerceConsultRequest {
     private String bayonet_fingerprint_token;
 
 
-    /** Internal id of a transaction maintained by the client (and not by Bayonet or the processing bank in question) */
+    /** Internal id of a transaction maintained by the client */
 
     private String transaction_id;
+
+
+    /** Internal id of an order maintained by the client */
+
+    private String order_id;
 
 
     /**
@@ -223,6 +228,11 @@ public class EcommerceConsultRequest {
 
     public EcommerceConsultRequest setTransactionId(String transaction_id) {
         this.transaction_id = transaction_id;
+        return this;
+    }
+
+    public EcommerceConsultRequest setOrderId(String order_id) {
+        this.order_id = order_id;
         return this;
     }
 }

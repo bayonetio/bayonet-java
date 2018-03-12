@@ -43,6 +43,11 @@ public class EcommerceClient extends Bayonet {
     private String decision;
 
 
+    /** Tracking ID returned by the Bayonet API */
+
+    private String bayonet_tracking_id;
+
+
     /** Payload data included in the response - only used on consulting API calls */
 
     private HashMap<String, Object> payload;
@@ -93,6 +98,7 @@ public class EcommerceClient extends Bayonet {
                 this.reason_message = response.getReason_message();
                 this.rules_triggered = response.getRulesTriggered();
                 this.decision = response.getDecision();
+                this.bayonet_tracking_id = response.getBayonet_tracking_id();
                 // get the entire payload as a nested map
                 try {
                     this.payload = response.getPayloadAsMap();
@@ -192,6 +198,7 @@ public class EcommerceClient extends Bayonet {
         rules_triggered = null;
         decision = null;
         payload = null;
+        bayonet_tracking_id = null;
     }
 
 
@@ -208,6 +215,10 @@ public class EcommerceClient extends Bayonet {
 
     public String getReasonMessage() {
         return reason_message;
+    }
+
+    public String getBayonetTrackingId() {
+        return bayonet_tracking_id;
     }
 
     public ArrayList<String> getRulesTriggered() {
