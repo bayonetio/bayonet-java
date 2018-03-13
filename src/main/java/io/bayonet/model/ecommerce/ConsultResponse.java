@@ -26,6 +26,11 @@ public class ConsultResponse extends BaseResponse {
     private OutputPayload payload;
 
 
+    /** Tracking ID returned by the Bayonet API */
+
+    private String bayonet_tracking_id;
+
+
     /**
      * Getters
      */
@@ -35,6 +40,10 @@ public class ConsultResponse extends BaseResponse {
 
     public String getDecision() {
         return decision;
+    }
+
+    public String getBayonet_tracking_id() {
+        return bayonet_tracking_id;
     }
 
     public HashMap<String, Object> getPayloadAsMap() throws IllegalAccessException {

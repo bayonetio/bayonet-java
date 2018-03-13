@@ -13,9 +13,19 @@ public class EcommerceUpdateTransactionRequest {
     private AuthModel auth;
 
 
-    /** ID of the transaction (previously sent by the client that needs to be udpated */
+    /** ID of an order maintained by the client (previously sent by the client that needs to be updated) */
+
+    private String order_id;
+
+
+    /** ID of the transaction (previously sent by the client that needs to be updated) */
 
     private String transaction_id;
+
+
+    /** Tracking ID returned by the Bayonet API */
+
+    private String bayonet_tracking_id;
 
 
     /** What happened with the consumer transaction on the client - success, cancelled, suspected_fraud, bank_decline or chargeback */
@@ -53,6 +63,16 @@ public class EcommerceUpdateTransactionRequest {
 
     public EcommerceUpdateTransactionRequest setTransactionId(String transaction_id) {
         this.transaction_id = transaction_id;
+        return this;
+    }
+
+    public EcommerceUpdateTransactionRequest setOrderId(String order_id) {
+        this.order_id = order_id;
+        return this;
+    }
+
+    public EcommerceUpdateTransactionRequest setBayonetTrackingId(String bayonet_tracking_id) {
+        this.bayonet_tracking_id = bayonet_tracking_id;
         return this;
     }
 
