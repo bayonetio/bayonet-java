@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import io.bayonet.exceptions.BayonetException;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 
 /**
@@ -72,14 +69,13 @@ public class HttpHelper {
             //add request headers
             con.setRequestMethod("POST");
             con.setRequestProperty("User-Agent", USER_AGENT);
-            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
             // send post request
             con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(params_as_json);
-            wr.flush();
-            wr.close();
+            OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
+            writer.write(params_as_json);
+            writer.close();
 
             // get the response
             int response_code = con.getResponseCode();
