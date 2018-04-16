@@ -20,14 +20,14 @@ To use this SDK, please make sure:
       <dependency>
         <groupId>io.bayonet</groupId>
         <artifactId>bayonet-java</artifactId>
-        <version>2.2.1</version>
+        <version>2.2.2</version>
       </dependency>
       ````
    * Gradle:
       
        ````
        dependencies {
-           compile 'io.bayonet:bayonet-java:2.2.1'
+           compile 'io.bayonet:bayonet-java:2.2.2'
        }
        ````
    * Manually:
