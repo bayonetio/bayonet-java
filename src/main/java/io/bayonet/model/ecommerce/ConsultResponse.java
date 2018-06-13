@@ -1,8 +1,8 @@
 package io.bayonet.model.ecommerce;
 
 import io.bayonet.model.base.BaseResponse;
+import io.bayonet.model.base.RulesTriggered;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -13,7 +13,7 @@ public class ConsultResponse extends BaseResponse {
 
     /** List of rules triggered by the persona consulted */
 
-    private ArrayList<String> rules_triggered;
+    private RulesTriggered rules_triggered;
 
 
     /** Decision to be taken regarding the consulted transactions */
@@ -34,7 +34,7 @@ public class ConsultResponse extends BaseResponse {
     /**
      * Getters
      */
-    public ArrayList<String> getRulesTriggered() {
+    public RulesTriggered getRulesTriggered() {
         return rules_triggered;
     }
 

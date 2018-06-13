@@ -5,9 +5,9 @@ import io.bayonet.Bayonet;
 import io.bayonet.exceptions.BayonetException;
 import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.base.BaseResponse;
+import io.bayonet.model.base.RulesTriggered;
 import io.bayonet.model.ecommerce.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -35,7 +35,7 @@ public class EcommerceClient extends Bayonet {
 
     /** List of rules triggered by the persona - only used on consulting API calls */
 
-    private ArrayList<String> rules_triggered;
+    private RulesTriggered rules_triggered;
 
 
     /** Decision to be taken regarding the consulted transactions */
@@ -221,7 +221,7 @@ public class EcommerceClient extends Bayonet {
         return bayonet_tracking_id;
     }
 
-    public ArrayList<String> getRulesTriggered() {
+    public RulesTriggered getRulesTriggered() {
         return rules_triggered;
     }
 

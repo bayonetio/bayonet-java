@@ -50,6 +50,7 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
     import io.bayonet.exceptions.BayonetException;
     import io.bayonet.model.base.Address;
     import io.bayonet.model.base.Product;
+    import io.bayonet.model.base.RulesTriggered;
     import io.bayonet.model.ecommerce.EcommerceConsultRequest;
 
     import java.util.ArrayList;
@@ -122,7 +123,11 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
         // decision whether to accept the transaction or not
         System.out.println(client.getDecision());
         // all the rules that were triggered by this consumer
-        ArrayList<String> rules_triggered = client.getRulesTriggered();
+        RulesTriggered rules_triggered = client.getRulesTriggered();
+        // custom rules
+        ArrayList<String> custom = rules_triggered.getCustom();
+        // dynamic rules
+        ArrayList<String> dynamic = rules_triggered.getDynamic();
         
         HashMap<String, Object> payload = client.getResponsePayload();      // response payload as nested map
         
