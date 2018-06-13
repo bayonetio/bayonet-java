@@ -355,7 +355,7 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
 
    /* Send the report transaction request */
    try {
-       client.reportTransaction(params);
+       client.reportTransactionAndConsult(params);
 
        /* process the response */
        System.out.println(client.getHttpResponseCode());                   // 200
