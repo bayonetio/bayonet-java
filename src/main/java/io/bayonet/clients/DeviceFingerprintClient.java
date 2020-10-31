@@ -1,11 +1,13 @@
 package io.bayonet.clients;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import io.bayonet.Bayonet;
 import io.bayonet.exceptions.BayonetException;
 import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.device_fingerprint.DeviceFingerprintRequest;
+import io.bayonet.model.device_fingerprint.ErrorResponse;
 
 import java.util.HashMap;
 
@@ -71,27 +73,39 @@ public class DeviceFingerprintClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, "get-fingerprint-data", api_version);
+        http_helper.request(params, "get-device-data", api_version);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response
         if(response_json!= null) {
-            // generate a Map from the json
-            HashMap<String, Object> response_map = new Gson().fromJson(
-                    response_json, new TypeToken<HashMap<String, Object>>() {}.getType()
-            );
             if(this.http_response_code == 200) {
+                // generate a Map from the json
+                HashMap<String, Object> response_map = new Gson().fromJson(
+                        response_json, new TypeToken<HashMap<String, Object>>() {}.getType()
+                );
                 this.device_info = response_map;
                 this.reason_code = 0;
                 this.reason_message = "success";
-                if(response_map.containsKey("bayonet_fingerprint"))
-                    this.bayonet_fingerprint = response_map.get("bayonet_fingerprint").toString();
+                if(response_map.containsKey("deviceFingerprint"))
+                    this.bayonet_fingerprint = response_map.get("deviceFingerprint").toString();
             }
             else if (this.http_response_code == 400 || this.http_response_code == 500) { // the API returns only 400 and 500 error codes
-                if(response_map.containsKey("status"))
-                    throw new BayonetException(-1, response_map.get("status").toString(), this.http_response_code);
-                else
-                    throw new BayonetException(-1, "Could not fetch a response from the Bayonet API. Please try again after some time", -1);
+                ErrorResponse error_response;
+                try {
+                    error_response = new Gson().fromJson(response_json, ErrorResponse.class);
+                } catch (JsonSyntaxException e) {
+                    throw new BayonetException(-1, "Internal SDK error. The client could not parse Device fingerprinting API response correctly. Please contact the Bayonet team to report this bug", -1);
+                }
+                // set default values if not present
+                if(error_response.getReasonCode() == null) {
+                    error_response.setReasonCode(-1);
+                }
+                if(error_response.getReasonMessage() == null) {
+                    error_response.setReasonMessage("Could not fetch a response from the Bayonet API. Please try again after some time");
+                }
+                this.reason_code = error_response.getReasonCode();
+                this.reason_message = error_response.getReasonMessage();
+                throw new BayonetException(error_response.getReasonCode(), error_response.getReasonMessage(), this.http_response_code);
             }
         }
         else {
