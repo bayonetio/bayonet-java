@@ -9,24 +9,24 @@ package io.bayonet.model.device_fingerprint;
 public class DeviceFingerprintRequest {
 
 
-    /** Api key to authenticate the client */
+    /** Auth info of the client */
 
-    private String api_key;
+    private AuthModel auth;
 
 
     /** Bayonet fingerprint token to query */
 
-    private String bayonet_fingerprint_token;
+    private String bayonetFingerprintToken;
 
 
     /**
      * Setters
      */
     public void setApiKey(String api_key) {
-        this.api_key = api_key;
+        this.auth = new AuthModel(api_key);
     }
     public DeviceFingerprintRequest setBayonetFingerprintToken(String bayonet_fingerprint_token) {
-        this.bayonet_fingerprint_token = bayonet_fingerprint_token;
+        this.bayonetFingerprintToken = bayonet_fingerprint_token;
         return this;
     }
 }

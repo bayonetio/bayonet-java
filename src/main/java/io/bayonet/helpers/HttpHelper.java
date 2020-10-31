@@ -59,7 +59,7 @@ public class HttpHelper {
         // parse the params to json
         String params_as_json = new Gson().toJson(params);
         // Endpoint url to connect to
-        String url = (route.equals("get-fingerprint-data") ? (BASE_URL_DEVICE_FINGERPRINT + "1") : (BASE_URL + api_version)) + "/" + route;
+        String url = (route.equals("get-device-data") ? (BASE_URL_DEVICE_FINGERPRINT) : (BASE_URL)) + api_version + "/" + route;
 
         try {
             // build the Url object
