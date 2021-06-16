@@ -1,12 +1,12 @@
 group 'io.bayonet'
-version '2.4.0'
+version '2.5.0'
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
