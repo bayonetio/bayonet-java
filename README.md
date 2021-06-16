@@ -12,7 +12,7 @@ The examples shown in this README are only for demonstration of the functionalit
 
 ## Getting started
 To use this SDK, please make sure:
-  * You have Java 1.6 or superior installed on your system.
+  * You have Java 1.7 or superior installed on your system.
   * You have an API KEY (sandbox and/or live) generated on your Bayonet console.
   * Maven:
   
@@ -20,14 +20,14 @@ To use this SDK, please make sure:
       <dependency>
         <groupId>io.bayonet</groupId>
         <artifactId>bayonet-java</artifactId>
-        <version>2.4.0</version>
+        <version>2.5.0</version>
       </dependency>
       ````
    * Gradle:
       
        ````
        dependencies {
-           compile 'io.bayonet:bayonet-java:2.4.0'
+           compile 'io.bayonet:bayonet-java:2.5.0'
        }
        ````
    * Manually:
@@ -128,8 +128,6 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
         ArrayList<String> custom = rules_triggered.getCustom();
         // dynamic rules
         ArrayList<String> dynamic = rules_triggered.getDynamic();
-        
-        HashMap<String, Object> payload = client.getResponsePayload();      // response payload as nested map
         
     } catch (BayonetException e) {
         System.out.println("error occurred");
