@@ -8,8 +8,6 @@ import io.bayonet.model.base.BaseResponse;
 import io.bayonet.model.base.RulesTriggered;
 import io.bayonet.model.ecommerce.*;
 
-import java.util.HashMap;
-
 /**
  * Created by imranarshad on 11/27/17
  *
@@ -46,11 +44,6 @@ public class EcommerceClient extends Bayonet {
     /** Tracking ID returned by the Bayonet API */
 
     private String bayonet_tracking_id;
-
-
-    /** Payload data included in the response - only used on consulting API calls */
-
-    private HashMap<String, Object> payload;
 
 
     /** Sub path for the API */
@@ -99,13 +92,6 @@ public class EcommerceClient extends Bayonet {
                 this.rules_triggered = response.getRulesTriggered();
                 this.decision = response.getDecision();
                 this.bayonet_tracking_id = response.getBayonet_tracking_id();
-                // get the entire payload as a nested map
-                try {
-                    this.payload = response.getPayloadAsMap();
-                } catch (IllegalAccessException e) {
-                    // this exception will only occur if there is some error with the implementation of nested map generation - which is the SDK's fault and not the client implementation
-                    throw new BayonetException(-1, "Internal SDK error. Please contact the Bayonet team to report this bug", -1);
-                }
             } else if (this.http_response_code == 400 || this.http_response_code == 500) { // the API returns only 400 and 500 error codes
                 BaseResponse response = new Gson().fromJson(response_json, BaseResponse.class);
                 throw new BayonetException(response.getReason_code(), response.getReason_message(), this.http_response_code);
@@ -197,7 +183,6 @@ public class EcommerceClient extends Bayonet {
         reason_message = null;
         rules_triggered = null;
         decision = null;
-        payload = null;
         bayonet_tracking_id = null;
     }
 
@@ -227,9 +212,5 @@ public class EcommerceClient extends Bayonet {
 
     public String getDecision() {
         return decision;
-    }
-
-    public HashMap<String, Object> getResponsePayload() {
-        return payload;
     }
 }
