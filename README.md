@@ -129,8 +129,6 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
         // dynamic rules
         ArrayList<String> dynamic = rules_triggered.getDynamic();
         
-        HashMap<String, Object> payload = client.getResponsePayload();      // response payload as nested map
-        
     } catch (BayonetException e) {
         System.out.println("error occurred");
         System.out.println("Reason code: " + e.getReasonCode());
