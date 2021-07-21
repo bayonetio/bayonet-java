@@ -26,9 +26,19 @@ public class Merchant {
     private String vertical;
 
 
+    /** Merchant sub vertical */
+
+    private String sub_vertical;
+
+
     /** Merchant email */
 
     private String email;
+
+
+    /** Merchant telephone */
+
+    private String telephone;
 
 
     /** Merchant level - defined by the client */
@@ -66,8 +76,18 @@ public class Merchant {
         return this;
     }
 
+    public Merchant setSubVertical(String subVertical) {
+        this.sub_vertical = subVertical;
+        return this;
+    }
+
     public Merchant setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public Merchant setTelephone(String telephone) {
+        this.telephone = telephone;
         return this;
     }
 
