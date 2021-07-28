@@ -30,6 +30,11 @@ public class Product {
     private String product_category;
 
 
+    /** Product quantity */
+
+    private Integer product_quantity;
+
+
 
     /**
      * Setters
@@ -51,6 +56,11 @@ public class Product {
 
     public Product setProductCategory(String product_category) {
         this.product_category = product_category;
+        return this;
+    }
+
+    public Product setProductQuantity(Integer product_quantity) {
+        this.product_quantity = product_quantity;
         return this;
     }
 }
