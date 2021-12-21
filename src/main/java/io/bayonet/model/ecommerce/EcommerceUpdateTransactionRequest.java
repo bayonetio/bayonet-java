@@ -38,6 +38,16 @@ public class EcommerceUpdateTransactionRequest {
     private String bank_decline_reason;
 
 
+    /** Payment decline code received by the client from the processing bank */
+
+    private String bank_decline_code;
+
+
+    /** Payment decline description */
+
+    private String bank_decline_description;
+
+
     /** Reason why the chargeback happened */
 
     private String chargeback_reason;
@@ -78,6 +88,16 @@ public class EcommerceUpdateTransactionRequest {
 
     public EcommerceUpdateTransactionRequest setBankDeclineReason(String bank_decline_reason) {
         this.bank_decline_reason = bank_decline_reason;
+        return this;
+    }
+
+    public EcommerceUpdateTransactionRequest setBankDeclineCode(String bank_decline_code) {
+        this.bank_decline_code = bank_decline_code;
+        return this;
+    }
+
+    public EcommerceUpdateTransactionRequest setBankDeclineDescription(String bank_decline_description) {
+        this.bank_decline_description = bank_decline_description;
         return this;
     }
 
