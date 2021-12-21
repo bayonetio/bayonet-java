@@ -151,6 +151,31 @@ public class EcommerceConsultRequest {
     private PaymentTerminal payment_terminal;
 
 
+    /** What happened with the consumer transaction on the client - success, cancelled, suspected_fraud, bank_decline or chargeback */
+
+    private String transaction_status;
+
+
+    /** Code sent back by the processing bank to the client when a transaction is processed */
+
+    private String bank_auth_code;
+
+
+    /** Payment decline reason received by the client from the processing bank - should be sent when transaction_status = bank_decline */
+
+    private String bank_decline_reason;
+
+
+    /** Payment decline code received by the client from the processing bank */
+
+    private String bank_decline_code;
+
+
+    /** Payment decline description */
+
+    private String bank_decline_description;
+
+
     /**
      * Getter and Setter methods
      */
@@ -291,6 +316,31 @@ public class EcommerceConsultRequest {
 
     public EcommerceConsultRequest setPaymentTerminal(PaymentTerminal payment_terminal) {
         this.payment_terminal = payment_terminal;
+        return this;
+    }
+
+    public EcommerceConsultRequest setTransactionStatus(String transaction_status) {
+        this.transaction_status = transaction_status;
+        return this;
+    }
+
+    public EcommerceConsultRequest setBankAuthCode(String bank_auth_code) {
+        this.bank_auth_code = bank_auth_code;
+        return this;
+    }
+
+    public EcommerceConsultRequest setBankDeclineReason(String bank_decline_reason) {
+        this.bank_decline_reason = bank_decline_reason;
+        return this;
+    }
+
+    public EcommerceConsultRequest setBankDeclineCode(String bank_decline_code) {
+        this.bank_decline_code = bank_decline_code;
+        return this;
+    }
+
+    public EcommerceConsultRequest setBankDeclineDescription(String bank_decline_description) {
+        this.bank_decline_description = bank_decline_description;
         return this;
     }
 }
