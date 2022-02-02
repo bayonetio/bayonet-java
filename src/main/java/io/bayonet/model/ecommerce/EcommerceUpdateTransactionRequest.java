@@ -43,6 +43,11 @@ public class EcommerceUpdateTransactionRequest {
     private String bank_decline_code;
 
 
+    /** Payment decline code type received by the client from the processing bank, e.g. ISO */
+
+    private String bank_decline_code_type;
+
+
     /** Payment decline description */
 
     private String bank_decline_description;
@@ -93,6 +98,11 @@ public class EcommerceUpdateTransactionRequest {
 
     public EcommerceUpdateTransactionRequest setBankDeclineCode(String bank_decline_code) {
         this.bank_decline_code = bank_decline_code;
+        return this;
+    }
+
+    public EcommerceUpdateTransactionRequest setBankDeclineCodeType(String bank_decline_code_type) {
+        this.bank_decline_code_type = bank_decline_code_type;
         return this;
     }
 
