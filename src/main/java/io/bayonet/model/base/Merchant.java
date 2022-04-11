@@ -16,6 +16,11 @@ public class Merchant {
     private String name;
 
 
+    /** Merchant owner name */
+
+    private String owner_name;
+
+
     /** Merchant category code (generally referred to as MCC) */
 
     private String category_code;
@@ -63,6 +68,11 @@ public class Merchant {
 
     public Merchant setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public Merchant setOwnerName(String ownerName) {
+        this.owner_name = ownerName;
         return this;
     }
 
