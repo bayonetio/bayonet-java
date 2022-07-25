@@ -91,6 +91,11 @@ public class EcommerceConsultRequest {
     private String payment_method;
 
 
+    /** Different methods within a payment method (e.g. usage type of card (chip, magnetic bank, nfc, etc.)   */
+
+    private String payment_sub_method;
+
+
     /** The coupon code used by the customer */
 
     private String coupon;
@@ -256,6 +261,11 @@ public class EcommerceConsultRequest {
 
     public EcommerceConsultRequest setPaymentMethod(String payment_method) {
         this.payment_method = payment_method;
+        return this;
+    }
+
+    public EcommerceConsultRequest setPaymentSubMethod(String payment_sub_method) {
+        this.payment_sub_method = payment_sub_method;
         return this;
     }
 
