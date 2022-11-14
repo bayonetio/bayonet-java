@@ -1,5 +1,5 @@
 group 'io.bayonet'
-version '2.9.0'
+version '2.10.0'
 
 apply plugin: 'java'
 apply plugin: 'maven'

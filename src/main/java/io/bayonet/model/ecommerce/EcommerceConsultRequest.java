@@ -3,6 +3,7 @@ package io.bayonet.model.ecommerce;
 import io.bayonet.model.base.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by imranarshad on 11/27/17
@@ -181,6 +182,11 @@ public class EcommerceConsultRequest {
     private String bank_decline_description;
 
 
+    /** Custom fields */
+
+    private HashMap<String, String> custom_fields;
+
+
     /**
      * Getter and Setter methods
      */
@@ -351,6 +357,11 @@ public class EcommerceConsultRequest {
 
     public EcommerceConsultRequest setBankDeclineDescription(String bank_decline_description) {
         this.bank_decline_description = bank_decline_description;
+        return this;
+    }
+
+    public EcommerceConsultRequest setCustomFields(HashMap<String, String> custom_fields) {
+        this.custom_fields = custom_fields;
         return this;
     }
 }
