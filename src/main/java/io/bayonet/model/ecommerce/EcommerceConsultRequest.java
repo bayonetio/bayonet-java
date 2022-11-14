@@ -3,6 +3,7 @@ package io.bayonet.model.ecommerce;
 import io.bayonet.model.base.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by imranarshad on 11/27/17
@@ -91,6 +92,11 @@ public class EcommerceConsultRequest {
     private String payment_method;
 
 
+    /** Different methods within a payment method (e.g. usage type of card (chip, magnetic bank, nfc, etc.)   */
+
+    private String payment_sub_method;
+
+
     /** The coupon code used by the customer */
 
     private String coupon;
@@ -176,6 +182,11 @@ public class EcommerceConsultRequest {
     private String bank_decline_description;
 
 
+    /** Custom fields */
+
+    private HashMap<String, String> custom_fields;
+
+
     /**
      * Getter and Setter methods
      */
@@ -256,6 +267,11 @@ public class EcommerceConsultRequest {
 
     public EcommerceConsultRequest setPaymentMethod(String payment_method) {
         this.payment_method = payment_method;
+        return this;
+    }
+
+    public EcommerceConsultRequest setPaymentSubMethod(String payment_sub_method) {
+        this.payment_sub_method = payment_sub_method;
         return this;
     }
 
@@ -341,6 +357,11 @@ public class EcommerceConsultRequest {
 
     public EcommerceConsultRequest setBankDeclineDescription(String bank_decline_description) {
         this.bank_decline_description = bank_decline_description;
+        return this;
+    }
+
+    public EcommerceConsultRequest setCustomFields(HashMap<String, String> custom_fields) {
+        this.custom_fields = custom_fields;
         return this;
     }
 }
