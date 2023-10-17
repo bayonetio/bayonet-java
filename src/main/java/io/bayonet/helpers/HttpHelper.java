@@ -3,9 +3,10 @@ package io.bayonet.helpers;
 import com.google.gson.Gson;
 import io.bayonet.exceptions.BayonetException;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLStreamHandler;
 
 /**
  * Created by imranarshad on 11/27/17
@@ -49,7 +50,7 @@ public class HttpHelper {
      * @param api_version API version to connect to
      * @throws BayonetException if the API returns an error
      */
-    public void request(Object params, String route, String api_version) throws BayonetException {
+    public void request(Object params, String route, String api_version, URLStreamHandler custom_url_stream_handler) throws BayonetException {
 
         // check if params and route are present
         if(params == null)
@@ -62,9 +63,15 @@ public class HttpHelper {
         String url = (route.equals("get-device-data") ? (BASE_URL_DEVICE_FINGERPRINT) : (BASE_URL)) + api_version + "/" + route;
 
         try {
-            // build the Url object
-            URL obj = new URL(url);
-            HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+            // build the Url object, using a custom URL stream handler if any
+            URL obj;
+            if(custom_url_stream_handler != null) {
+                obj = new URL(null, url, custom_url_stream_handler);
+            } else {
+                obj = new URL(url);
+            }
+
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
             //add request headers
             con.setRequestMethod("POST");

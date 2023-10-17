@@ -8,6 +8,8 @@ import io.bayonet.model.base.BaseResponse;
 import io.bayonet.model.base.RulesTriggered;
 import io.bayonet.model.ecommerce.*;
 
+import java.net.URLStreamHandler;
+
 /**
  * Created by imranarshad on 11/27/17
  *
@@ -51,6 +53,11 @@ public class EcommerceClient extends Bayonet {
     private final static String SUB_PATH = "sigma";
 
 
+    /** Custom URL stream handler (provided by the client) */
+
+    private URLStreamHandler custom_url_stream_handler = null;
+
+
     /**
      * Constructor to set up the client configuration
      *
@@ -60,6 +67,20 @@ public class EcommerceClient extends Bayonet {
 
     public EcommerceClient(String api_key, String api_version) {
         super(api_key, api_version);
+    }
+
+
+    /**
+     * Constructor to set up the client configuration with a custom URL stream handler
+     *
+     * @param api_key client api key
+     * @param api_version Bayonet api version to connect to
+     * @param custom_url_stream_handler Customer URL stream handler
+     */
+
+    public EcommerceClient(String api_key, String api_version, URLStreamHandler custom_url_stream_handler) {
+        super(api_key, api_version);
+        this.custom_url_stream_handler = custom_url_stream_handler;
     }
 
 
@@ -80,7 +101,7 @@ public class EcommerceClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/consult", api_version);
+        http_helper.request(params, SUB_PATH + "/consult", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         if(response_json!= null ) {
@@ -119,7 +140,7 @@ public class EcommerceClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/feedback-historical", api_version);
+        http_helper.request(params, SUB_PATH + "/feedback-historical", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response
@@ -144,7 +165,7 @@ public class EcommerceClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/update-transaction", api_version);
+        http_helper.request(params, SUB_PATH + "/update-transaction", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response

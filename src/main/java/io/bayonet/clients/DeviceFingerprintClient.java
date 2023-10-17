@@ -9,6 +9,7 @@ import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.device_fingerprint.DeviceFingerprintRequest;
 import io.bayonet.model.device_fingerprint.ErrorResponse;
 
+import java.net.URLStreamHandler;
 import java.util.HashMap;
 
 /**
@@ -44,6 +45,10 @@ public class DeviceFingerprintClient extends Bayonet {
     private HashMap<String, Object> device_info;
 
 
+    /** Custom URL stream handler (provided by the client) */
+
+    private URLStreamHandler custom_url_stream_handler = null;
+
 
     /**
      * Constructor to set up the client configuration
@@ -56,6 +61,18 @@ public class DeviceFingerprintClient extends Bayonet {
         super(api_key, api_version);
     }
 
+
+    /**
+     * Constructor to set up the client configuration with a custom URL stream handler
+     *
+     * @param api_key client api key
+     * @param api_version Bayonet api version to connect to
+     * @param custom_url_stream_handler Customer URL stream handler
+     */
+    public DeviceFingerprintClient(String api_key, String api_version, URLStreamHandler custom_url_stream_handler) {
+        super(api_key, api_version);
+        this.custom_url_stream_handler = custom_url_stream_handler;
+    }
 
     /**
      * Handler for sending get fingerprint data API calls
@@ -73,7 +90,7 @@ public class DeviceFingerprintClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, "get-device-data", api_version);
+        http_helper.request(params, "get-device-data", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response

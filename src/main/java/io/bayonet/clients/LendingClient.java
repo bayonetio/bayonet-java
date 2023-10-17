@@ -7,6 +7,7 @@ import io.bayonet.helpers.HttpHelper;
 import io.bayonet.model.base.BaseResponse;
 import io.bayonet.model.lending.*;
 
+import java.net.URLStreamHandler;
 import java.util.HashMap;
 
 /**
@@ -42,6 +43,11 @@ public class LendingClient extends Bayonet {
     private final static String SUB_PATH = "lending";
 
 
+    /** Custom URL stream handler (provided by the client) */
+
+    private URLStreamHandler custom_url_stream_handler = null;
+
+
     /**
      * Constructor to set up the client configuration
      *
@@ -53,6 +59,17 @@ public class LendingClient extends Bayonet {
         super(api_key, api_version);
     }
 
+    /**
+     * Constructor to set up the client configuration with a custom URL stream handler
+     *
+     * @param api_key client api key
+     * @param api_version Bayonet api version to connect to
+     * @param custom_url_stream_handler Customer URL stream handler
+     */
+    public LendingClient(String api_key, String api_version, URLStreamHandler custom_url_stream_handler) {
+        super(api_key, api_version);
+        this.custom_url_stream_handler = custom_url_stream_handler;
+    }
 
     /**
      * Handler for sending transaction listener API calls
@@ -73,7 +90,7 @@ public class LendingClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/transaction/report", api_version);
+        http_helper.request(params, SUB_PATH + "/transaction/report", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response
@@ -99,7 +116,7 @@ public class LendingClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/transaction/report?consult=true", api_version);
+        http_helper.request(params, SUB_PATH + "/transaction/report?consult=true", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         processConsultResponse(response_json);
@@ -124,7 +141,7 @@ public class LendingClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/consult", api_version);
+        http_helper.request(params, SUB_PATH + "/consult", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         processConsultResponse(response_json);
@@ -147,7 +164,7 @@ public class LendingClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/feedback", api_version);
+        http_helper.request(params, SUB_PATH + "/feedback", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response
@@ -171,7 +188,7 @@ public class LendingClient extends Bayonet {
 
         // send the request
         HttpHelper http_helper = new HttpHelper();
-        http_helper.request(params, SUB_PATH + "/feedback-historical", api_version);
+        http_helper.request(params, SUB_PATH + "/feedback-historical", api_version, custom_url_stream_handler);
         this.http_response_code = http_helper.getResponseCode();
         String response_json = http_helper.getResponseJson();
         // process the response
