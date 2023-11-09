@@ -35,6 +35,11 @@ public class Product {
     private Integer product_quantity;
 
 
+    /** Product metadata */
+
+    private ProductMetadata metadata;
+
+
 
     /**
      * Setters
@@ -61,6 +66,11 @@ public class Product {
 
     public Product setProductQuantity(Integer product_quantity) {
         this.product_quantity = product_quantity;
+        return this;
+    }
+
+    public Product setProductMetadata(ProductMetadata metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

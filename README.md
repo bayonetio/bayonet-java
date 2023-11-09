@@ -20,14 +20,14 @@ To use this SDK, please make sure:
       <dependency>
         <groupId>io.bayonet</groupId>
         <artifactId>bayonet-java</artifactId>
-        <version>2.11.0</version>
+        <version>2.12.0</version>
       </dependency>
       ````
    * Gradle:
       
        ````
        dependencies {
-           compile 'io.bayonet:bayonet-java:2.11.0'
+           compile 'io.bayonet:bayonet-java:2.12.0'
        }
        ````
    * Manually:
@@ -100,6 +100,14 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
                     .setProductName("product_1")
                     .setProductPrice(75.00)
                     .setProductCategory("example category")
+                    .setProductQuantity(1)
+                    .setProductMetadata(new ProductMetadata()
+                        .setEventTime(1517518880L)
+                        .setEventLocation(new Location()
+                                .setLatitude("12.12")
+                                .setLongitude("12.12")
+                        )
+                    )
             );
             products.add(
                     new Product()
@@ -107,6 +115,14 @@ Once you have Bayonet's SDK configured, you can call the APIs with the following
                     .setProductName("product_2")
                     .setProductPrice(25.00)
                     .setProductCategory("example category")
+                    .setProductQuantity(2)
+                    .setProductMetadata(new ProductMetadata()
+                        .setEventTime(1517518880L)
+                        .setEventLocation(new Location()
+                                .setLatitude("12.12")
+                                .setLongitude("12.12")
+                        )
+                    )
             );
     params.setProducts(products);
     
